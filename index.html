@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f2eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Tabi" />
+    <title>Japan 2026 — Private trip planner</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/tabi-icon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./refinements.css" />
+    <link rel="stylesheet" href="./features.css" />
+    <link rel="stylesheet" href="./live-tools.css" />
+    <link rel="stylesheet" href="./no-budget.css" />
+    <link rel="stylesheet" href="./links-refine.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#dashboard" data-page="dashboard"><span class="seal">日</span><span>Tabi<br><em>for two</em></span></a>
+        <nav class="main-nav">
+          <a class="nav-link active" href="#dashboard" data-page="dashboard"><i>01</i> Overview</a>
+          <a class="nav-link" href="#itinerary" data-page="itinerary"><i>02</i> Itinerary</a>
+          <a class="nav-link" href="#map" data-page="map"><i>03</i> Route map</a>
+          <a class="nav-link" href="#restaurants" data-page="restaurants"><i>04</i> Saved places</a>
+          <a class="nav-link" href="#stays" data-page="stays"><i>05</i> Stays & bookings</a>
+          <a class="nav-link" href="#notes" data-page="notes"><i>06</i> Notes</a>
+        </nav>
+        <div class="side-foot"><div class="presence"><span></span> Evon & Ivan</div><p>Private trip<br>29 Oct — 08 Nov 2026</p></div>
+      </aside>
+
+      <main>
+        <header class="topbar"><button class="mobile-menu" aria-label="Open menu">☰</button><span class="location-label" id="top-location">TRIP OVERVIEW</span><div class="top-actions"><div class="language-switch" aria-label="Language"><button data-lang="en" class="active">EN</button><button data-lang="zh">中文</button><button data-lang="ja">日本語</button></div><button class="quiet-btn" id="open-search">⌘ K&nbsp; Search</button><button class="avatar" aria-label="Evon">E</button></div></header>
+
+        <section class="page active" id="dashboard">
+          <div class="hero editorial-rule">
+            <div><p class="eyebrow">PRIVATE JOURNEY · AUTUMN 2026</p><h1>Japan <i>for two</i></h1><p class="route">Osaka · Kyoto · Amanohashidate · Kinosaki · Awaji</p></div>
+            <div class="hero-date"><span>29 OCT</span><b>—</b><span>08 NOV</span><small>11 days · 2 travellers</small></div>
+          </div>
+          <section class="snapshot" aria-label="Trip snapshot">
+            <article><span>DEPARTURE</span><strong id="countdown">—</strong><small>days to go</small></article>
+            <article><span>STAYS</span><strong>6<span>/6</span></strong><small>confirmed</small></article>
+            <article><span>SAVED</span><strong>28</strong><small>places to eat</small></article>
+          </section>
+          <section class="enrich-strip" aria-label="Complete place details">
+            <div><p class="eyebrow">PLACE DETAILS</p><b>Make the itinerary easier to recognise.</b><small id="enrich-status">Find a photo and official website when there is a confident public match. Your existing links stay untouched.</small></div>
+            <button class="enrich-btn" id="auto-enrich" type="button">Auto-fill places <span>↗</span></button>
+          </section>
+          <div class="dashboard-grid">
+            <section class="today-panel paper-card">
+              <div class="section-head"><div><p class="eyebrow">NEXT UP</p><h2>Kyoto, <i>day two</i></h2></div><button class="link-btn" data-go="itinerary">View day <span>→</span></button></div>
+              <div class="next-stop"><div class="time">08:20<small>FRI · 30 OCT</small></div><div class="line-dot"></div><div><span class="pill transit">TRAIN · 47 MIN</span><h3>Yodoyabashi to Kyoto</h3><p>Leave luggage at Hotel Resol Trinity Kyoto</p></div><button class="circle-btn" aria-label="Open route">↗</button></div>
+              <div class="stay-strip"><span class="building">⌂</span><div><small>YOUR NEXT STAY</small><b>Hotel Resol Trinity Kyoto</b><p>30 Oct — 02 Nov · Check-in from 15:00</p></div><button class="text-action">Booking</button></div>
+            </section>
+            <section class="route-card"><div class="route-map"><div class="map-label osaka">OSAKA</div><div class="map-label kyoto">KYOTO</div><div class="map-label miyazu">MIYAZU</div><div class="map-label kinosaki">KINOSAKI</div><div class="map-label awaji">AWAJI</div><svg viewBox="0 0 520 250" preserveAspectRatio="none" aria-hidden="true"><path d="M70 190 C130 150 90 95 165 80 S260 18 320 70 S360 142 430 155 S470 195 475 210" /></svg></div><div class="route-caption"><div><p class="eyebrow">THE LONG WAY ROUND</p><b>10 stops, one winding route</b></div><button class="map-open" data-go="map">Open map ↗</button></div></section>
+            <section class="days-panel paper-card"><div class="section-head"><div><p class="eyebrow">THE DAYS AHEAD</p><h2>Small moments,<br><i>well placed.</i></h2></div><button class="link-btn" data-go="itinerary">All days <span>→</span></button></div><div class="day-list" id="dashboard-days"></div></section>
+            <section class="reminders paper-card"><div class="section-head"><div><p class="eyebrow">BEFORE YOU GO</p><h2>Loose ends</h2></div><span class="count">3</span></div><ul><li><span class="check"></span><div><b>Reserve Kyoto dinner</b><small>Pontocho · 31 Oct</small></div><button>···</button></li><li><span class="check"></span><div><b>Pick up international permit</b><small>Needed before 02 Nov</small></div><button>···</button></li><li><span class="check"></span><div><b>Forward luggage details</b><small>Kyoto → Osaka</small></div><button>···</button></li></ul><button class="add-task">+ Add a task</button></section>
+          </div>
+        </section>
+
+        <section class="page" id="itinerary">
+          <div class="itinerary-head"><div><p class="eyebrow" id="day-kicker">DAY 03 · SATURDAY</p><h1 id="day-title">Higashiyama <i>at first light</i></h1><p id="day-subtitle">31 October 2026 · Kyoto</p></div><div class="saved-state"><span></span> Saved just now<br><small>Last updated by Evon</small></div></div>
+          <div class="date-rail" id="date-rail" aria-label="Choose trip date"></div>
+          <div class="day-meta" id="day-meta"></div>
+          <div class="itinerary-layout"><aside class="timeline-side"><div class="weather"><span id="weather-icon">☀</span><b id="weather-temp">—</b><small id="weather-summary">Loading local weather…</small></div><dl><div><dt>Sunset</dt><dd>17:05</dd></div><div><dt>Walking</dt><dd id="walking-time">1h 42m</dd></div><div><dt>Planned</dt><dd id="planned-time">8h 15m</dd></div></dl><div class="notice"><b>Good to know</b><p id="daily-notice">Leave early for quieter temple paths.</p></div><section class="ai-planner"><p class="eyebrow">AI TRIP ASSISTANT</p><h3>Plan a <i>place</i></h3><p class="ai-copy">Name a spot. I’ll suggest the best time and a simple next stop.</p><label class="sr-only" for="ai-place">Place name</label><input id="ai-place" placeholder="e.g. Fushimi Inari" /><div class="ai-type-toggle" aria-label="Place type"><button data-ai-type="Activity" class="active">Activity</button><button data-ai-type="Meal">Meal</button></div><button id="ask-ai" class="ai-ask">Suggest a plan →</button><div id="ai-answer" class="ai-answer" aria-live="polite"></div></section></aside>
+            <section class="timeline-wrap"><div class="timeline-heading"><h2>Today’s <i>rhythm</i></h2><button class="secondary-btn" id="quick-add-day">+ Add stop</button></div><div id="timeline" class="timeline"></div></section>
+            <aside class="context-panel"><div class="place-glance" id="place-glance"></div><a class="route-link" id="today-route-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer">Open today’s route in Google Maps <span>↗</span></a><div class="hotel-context"><p class="eyebrow">TONIGHT’S STAY</p><b>Hotel Resol Trinity Kyoto</b><small>Check in by 00:00 · 14 min taxi</small><button>View details</button></div></aside>
+          </div>
+        </section>
+
+        <section class="page map-page" id="map"><div class="map-page-head"><div><p class="eyebrow">GOOGLE MAPS · TODAY’S ROUTE</p><h1>Where to <i>next?</i></h1></div><a id="google-route" class="primary-map-link" target="_blank" rel="noreferrer">Open full route in Google Maps ↗</a></div><div class="map-experience"><div class="google-map-frame"><iframe id="google-map-preview" title="Google Maps place preview" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="map-frame-caption"><span>GOOGLE MAPS PREVIEW</span><b id="map-preview-name">Choose a place</b></div></div><aside class="map-stops"><div class="section-head"><div><p class="eyebrow">TODAY’S STOPS</p><h2>Tap to <i>navigate</i></h2></div></div><div id="map-stop-list"></div></aside></div></section>
+        <section class="page placeholder" id="restaurants"><p class="eyebrow">SAVED PLACES</p><h1>For hungry <i>wandering.</i></h1><div class="restaurant-list"><article><span>KYOTO · DINNER</span><b>Omen Ginkakuji</b><small class="card-translation">银阁寺 Omen 乌冬面</small><em>Udon · Want to go</em></article><article><span>OSAKA · LUNCH</span><b>Endo Sushi</b><small class="card-translation">远藤寿司</small><em>Sushi · Priority</em></article><article><span>INE · LUNCH</span><b>Funaya Shokudo</b><small class="card-translation">伊根舟屋食堂</small><em>Seafood · Backup</em></article></div></section>
+        <section class="page placeholder" id="stays"><p class="eyebrow">STAYS & BOOKINGS</p><h1>Six places to <i>unpack.</i></h1><div class="hotel-list" id="hotel-list"></div></section>
+        <section class="page placeholder" id="notes"><p class="eyebrow">SHARED NOTES</p><h1>Things worth <i>remembering.</i></h1><textarea placeholder="Add a small note for the trip…"></textarea></section>
+      </main>
+      <nav class="mobile-nav" aria-label="Mobile navigation"><a class="active" href="#itinerary" data-page="itinerary">◫<span>Itinerary</span></a><a href="#map" data-page="map">⌖<span>Map</span></a><button id="mobile-add" aria-label="Add something">+</button><a href="#restaurants" data-page="restaurants">♡<span>Saved</span></a><a href="#notes" data-page="notes">•••<span>More</span></a></nav>
+      <button class="floating-add" id="floating-add" aria-label="Add to trip">+</button>
+    </div>
+    <dialog id="add-dialog"><form id="add-form"><button type="button" class="close-modal" id="close-add" aria-label="Close">×</button><p class="eyebrow">QUICK ADD · <span id="modal-context">HIGASHIYAMA</span></p><h2>Add a stop</h2><label>What are you adding?<input id="new-title" required placeholder="e.g. Coffee at Weekenders" autofocus /></label><div class="form-row"><label>Time<input id="new-time" type="time" value="13:30" /></label><label>Category<select id="new-category"><option>Activity</option><option>Meal</option><option>Transport</option><option>Free time</option></select></label></div><label>Short note <input id="new-note" placeholder="Optional details" /></label><details class="place-details"><summary>Add place links & photo <span>optional</span></summary><label>Address / Google Maps search<input id="new-place" placeholder="e.g. Kiyomizu-dera, Kyoto" /></label><label>Google Maps link<input id="new-map" type="url" placeholder="https://maps.google.com/..." /></label><label>Website link<input id="new-website" type="url" placeholder="Restaurant, attraction, Instagram…" /></label><label>Photo image URL<input id="new-photo" type="url" placeholder="Paste an image URL for a visual reminder" /></label></details><button class="primary-btn" type="submit">Add to itinerary</button><button class="cancel-add" type="button" id="cancel-add">Cancel</button></form></dialog>
+    <input id="photo-upload" type="file" accept="image/*" hidden />
+    <dialog id="search-dialog"><form id="search-form"><button type="button" class="close-modal" id="close-search" aria-label="Close">×</button><p class="eyebrow">SEARCH YOUR ITINERARY</p><h2>Find a place</h2><input id="search-input" placeholder="Search places, hotels, meals…" autofocus /><div id="search-results" class="search-results"></div></form></dialog>
+    <dialog id="link-dialog"><form id="link-form"><button type="button" class="close-modal" id="close-link" aria-label="Close">×</button><p class="eyebrow">STOP LINKS</p><h2 id="link-title">Edit links</h2><label>Paste one link — auto-detects map, booking/site, or direct photo<input id="smart-link" type="url" placeholder="Paste Agoda, Booking, Google Maps or an image link" /></label><label>Place / address<input id="edit-place" placeholder="Exact venue name for navigation" /></label><label>Google Maps link<input id="edit-map" type="url" placeholder="https://maps.google.com/..." /></label><label>Website / booking link<input id="edit-website" type="url" placeholder="Agoda, Booking, restaurant or official site" /></label><label>Photo image URL<input id="edit-photo" type="url" placeholder="Optional visual reminder" /></label><button class="primary-btn" type="submit">Save links</button><button class="cancel-add" type="button" id="cancel-link">Cancel</button></form></dialog>
+    <dialog id="calendar-dialog"><form id="calendar-form"><button type="button" class="close-modal" id="close-calendar" aria-label="Close">×</button><p class="eyebrow">TRIP CALENDAR</p><h2>Your travel days</h2><p class="calendar-copy">Choose any date, then give the day a city and a loose theme. You can edit the itinerary after adding it.</p><div id="calendar-days" class="calendar-days"></div><div class="calendar-add"><label>Date<input id="calendar-date" type="date" required /></label><label>City<input id="calendar-city" required placeholder="e.g. Seoul" /></label><label>Day theme<input id="calendar-theme" placeholder="e.g. First night in the city" /></label></div><button class="primary-btn" type="submit">Add day to itinerary</button><button class="cancel-add" type="button" id="cancel-calendar">Done</button></form></dialog>
+    <script src="./app.js"></script>
+    <script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));</script>
+  </body>
+</html>
