@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="./live-tools.css" />
     <link rel="stylesheet" href="./no-budget.css" />
     <link rel="stylesheet" href="./links-refine.css" />
+    <link rel="stylesheet" href="./mobile-inputs.css" />
+    <link rel="stylesheet" href="./itinerary-cards.css" />
+    <link rel="stylesheet" href="./nearby-picks.css" />
+    <link rel="stylesheet" href="./nearby-picks-refine.css" />
   </head>
   <body>
     <div class="shell">
@@ -86,8 +90,8 @@
     <input id="photo-upload" type="file" accept="image/*" hidden />
     <dialog id="search-dialog"><form id="search-form"><button type="button" class="close-modal" id="close-search" aria-label="Close">×</button><p class="eyebrow">SEARCH YOUR ITINERARY</p><h2>Find a place</h2><input id="search-input" placeholder="Search places, hotels, meals…" autofocus /><div id="search-results" class="search-results"></div></form></dialog>
     <dialog id="link-dialog"><form id="link-form"><button type="button" class="close-modal" id="close-link" aria-label="Close">×</button><p class="eyebrow">STOP LINKS</p><h2 id="link-title">Edit links</h2><label>Paste one link — auto-detects map, booking/site, or direct photo<input id="smart-link" type="url" placeholder="Paste Agoda, Booking, Google Maps or an image link" /></label><label>Place / address<input id="edit-place" placeholder="Exact venue name for navigation" /></label><label>Google Maps link<input id="edit-map" type="url" placeholder="https://maps.google.com/..." /></label><label>Website / booking link<input id="edit-website" type="url" placeholder="Agoda, Booking, restaurant or official site" /></label><label>Photo image URL<input id="edit-photo" type="url" placeholder="Optional visual reminder" /></label><button class="primary-btn" type="submit">Save links</button><button class="cancel-add" type="button" id="cancel-link">Cancel</button></form></dialog>
-    <dialog id="calendar-dialog"><form id="calendar-form"><button type="button" class="close-modal" id="close-calendar" aria-label="Close">×</button><p class="eyebrow">TRIP CALENDAR</p><h2>Your travel days</h2><p class="calendar-copy">Choose any date, then give the day a city and a loose theme. You can edit the itinerary after adding it.</p><div id="calendar-days" class="calendar-days"></div><div class="calendar-add"><label>Date<input id="calendar-date" type="date" required /></label><label>City<input id="calendar-city" required placeholder="e.g. Seoul" /></label><label>Day theme<input id="calendar-theme" placeholder="e.g. First night in the city" /></label></div><button class="primary-btn" type="submit">Add day to itinerary</button><button class="cancel-add" type="button" id="cancel-calendar">Done</button></form></dialog>
-    <script src="./app.js"></script>
+    <dialog id="calendar-dialog"><form id="calendar-form"><button type="button" class="close-modal" id="close-calendar" aria-label="Close">×</button><p class="eyebrow">TRIP CALENDAR</p><h2>Your travel days</h2><p class="calendar-copy">Choose any date, then give the day a city and a loose theme. You can edit the itinerary after adding it.</p><div id="calendar-days" class="calendar-days"></div><div class="calendar-add"><label>Date<input id="calendar-date" type="date" required /></label><label>Country<input id="calendar-country" required placeholder="e.g. China" /></label><label>City<input id="calendar-city" required placeholder="e.g. Shanghai" /></label><label>Day theme<input id="calendar-theme" placeholder="e.g. First night in the city" /></label></div><button class="primary-btn" type="submit">Add day to itinerary</button><button class="cancel-add" type="button" id="cancel-calendar">Done</button></form></dialog>
+    <script src="./app.js?v=20260726-global-ai-places"></script>
     <script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));</script>
   </body>
 </html>
