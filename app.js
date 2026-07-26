@@ -337,3 +337,32 @@ function renderSavedPlaceMap(){
 const renderSavedPlacesWithMap=renderSavedPlaces;
 renderSavedPlaces=function(){renderSavedPlacesWithMap();renderSavedPlaceMap()};
 renderSavedPlaces();
+/* Real saved-place map. Coordinates are cached locally after a lightweight geocode. */
+var savedLeafletMap=null;
+var savedLeafletMarkers=[];
+var savedGeocodeTried=new Set();
+const savedCityCoordinates={Kyoto:[35.0116,135.7681],Osaka:[34.6937,135.5023],Miyazu:[35.5355,135.1931],Kinosaki:[35.6266,134.8143],Awaji:[34.3428,134.9164],Tokyo:[35.6762,139.6503],Nara:[34.6851,135.805],Kobe:[34.6901,135.1955],Hiroshima:[34.3853,132.4553],Sapporo:[43.0618,141.3545],Fukuoka:[33.5904,130.4017],Nagoya:[35.1815,136.9066],Shanghai:[31.2304,121.4737],Beijing:[39.9042,116.4074],Melbourne:[-37.8136,144.9631],Sydney:[-33.8688,151.2093],Seoul:[37.5665,126.978],Taipei:[25.033,121.5654],Singapore:[1.3521,103.8198],Bangkok:[13.7563,100.5018],Paris:[48.8566,2.3522],London:[51.5072,-.1276],Rome:[41.9028,12.4964],Barcelona:[41.3874,2.1686],Dubai:[25.2048,55.2708],Istanbul:[41.0082,28.9784],Cairo:[30.0444,31.2357],Amsterdam:[52.3676,4.9041],'New York':[40.7128,-74.006],'San Francisco':[37.7749,-122.4194],'Los Angeles':[34.0522,-118.2437],Toronto:[43.6532,-79.3832]};
+const savedPlaceCoordinates={'kiyomizu-dera':[34.9949,135.785],'清水寺':[34.9949,135.785],'dotonbori':[34.6687,135.5013],'道顿堀':[34.6687,135.5013],'umeda sky building':[34.7053,135.4906],'梅田蓝天大厦':[34.7053,135.4906],'amanohashidate view land':[35.5577,135.1831],'天桥立观景乐园':[35.5577,135.1831],'the bund':[31.2401,121.4901],'外滩':[31.2401,121.4901],'yu garden':[31.2272,121.4927],'豫园':[31.2272,121.4927]};
+function savedPlaceCoordinatesFor(place){let exact=savedPlaceCoordinates[normalName(place.name)]||savedPlaceCoordinates[normalName(place.zh)];return place.lat&&place.lng?[+place.lat,+place.lng]:(exact||savedCityCoordinates[place.city]||[35.6762,139.6503])}
+function savedMapDetailHtml(place){let photo=place.photo?`<img src="${place.photo}" alt="" />`:'<span class="saved-map-photo-fallback">⌁</span>';let website=place.website?`<a href="${place.website}" target="_blank" rel="noopener">Website ↗</a>`:'';return `<div class="saved-map-place"><div class="saved-map-photo">${photo}</div><div><p class="eyebrow">${esc(place.type||'Saved place')}</p><h3>${esc(place.name)}</h3><p>${esc(place.zh||'')} ${place.city?`· ${esc(place.city)}`:''}</p></div></div><iframe title="Google Maps preview for ${esc(place.name)}" src="${savedPlaceEmbedUrl(place)}" loading="lazy"></iframe><div class="saved-map-links"><a class="saved-map-google" href="${savedPlaceGoogleUrl(place)}" target="_blank" rel="noopener">Open Google Maps ↗</a>${website}</div><p class="saved-map-note">Live ratings, photos and directions open in Google Maps.</p>`}
+function setSavedMapSelection(place,panToPlace=true){if(!place)return;selectedSavedMapKey=place.key;let detail=document.querySelector('#saved-map-detail');if(detail)detail.innerHTML=savedMapDetailHtml(place);if(panToPlace&&savedLeafletMap){let coords=savedPlaceCoordinatesFor(place);savedLeafletMap.flyTo(coords,Math.max(savedLeafletMap.getZoom(),13),{duration:.45});savedLeafletMarkers.forEach(entry=>entry.marker.getElement()?.classList.toggle('is-selected',entry.place.key===place.key))}}
+async function geocodeSavedPlaces(){for(const place of savedPlaces){if(place.lat&&place.lng||savedGeocodeTried.has(place.key))continue;savedGeocodeTried.add(place.key);try{let query=encodeURIComponent(savedPlaceMapQuery(place));let response=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${query}`);let result=await response.json();if(result?.[0]){place.lat=+result[0].lat;place.lng=+result[0].lon;persistSavedPlaces();if(savedLeafletMap)renderSavedPlaceMap()}}catch{}}}
+renderSavedPlaceMap=function(){
+  const host=document.querySelector('#saved-place-map');
+  if(!host)return;
+  if(!savedPlaces.length){if(savedLeafletMap){savedLeafletMap.remove();savedLeafletMap=null}host.innerHTML='';return}
+  if(!savedPlaces.some(place=>place.key===selectedSavedMapKey))selectedSavedMapKey=savedPlaces[0].key;
+  const selected=savedPlaces.find(place=>place.key===selectedSavedMapKey)||savedPlaces[0];
+  if(savedLeafletMap){savedLeafletMap.remove();savedLeafletMap=null}
+  host.innerHTML=`<div class="saved-map-head"><div><p class="eyebrow">YOUR SAVED MAP · 收藏地图</p><h2>Explore your places on the map.</h2></div><span>${savedPlaces.length} saved</span></div><div class="saved-map-layout"><div id="saved-leaflet-map" class="saved-leaflet-map" aria-label="Interactive saved places map"></div><aside id="saved-map-detail" class="saved-map-detail">${savedMapDetailHtml(selected)}</aside></div>`;
+  if(!window.L){document.querySelector('#saved-leaflet-map').innerHTML='<p class="saved-map-load-error">Map is unavailable while offline.</p>';return}
+  savedLeafletMap=L.map('saved-leaflet-map',{scrollWheelZoom:true,zoomControl:true,attributionControl:true});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(savedLeafletMap);
+  const tabiIcon=L.divIcon({className:'tabi-leaflet-icon',html:'<span class="tabi-leaflet-pin"><img src="./assets/tabi-icon-192.png" alt="" /></span>',iconSize:[42,50],iconAnchor:[21,48],popupAnchor:[0,-47]});
+  savedLeafletMarkers=savedPlaces.map(place=>{let coords=savedPlaceCoordinatesFor(place),marker=L.marker(coords,{icon:tabiIcon,keyboard:true,title:place.name}).addTo(savedLeafletMap);marker.bindPopup(`<b>${esc(place.name)}</b><br><small>${esc(place.zh||place.city||'')}</small>`);marker.on('click',()=>setSavedMapSelection(place,false));return {place,marker}});
+  const bounds=L.latLngBounds(savedPlaces.map(savedPlaceCoordinatesFor));
+  if(savedPlaces.length===1)savedLeafletMap.setView(savedPlaceCoordinatesFor(selected),12);else savedLeafletMap.fitBounds(bounds.pad(.22),{maxZoom:9});
+  setTimeout(()=>savedLeafletMap?.invalidateSize(),50);
+  geocodeSavedPlaces();
+};
+renderSavedPlaces();

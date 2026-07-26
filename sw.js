@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tabi-app-shell-v43';
+const CACHE_NAME = 'tabi-app-shell-v45';
 const APP_SHELL = [
   './',
   './index.html',
