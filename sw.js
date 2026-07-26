@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tabi-app-shell-v18';
+const CACHE_NAME = 'tabi-app-shell-v34';
 const APP_SHELL = [
   './',
   './index.html',
@@ -13,6 +13,9 @@ const APP_SHELL = [
   './itinerary-cards.css',
   './nearby-picks.css',
   './nearby-picks-refine.css',
+  './saved-places.css',
+  './visual-refinement.css',
+  './bookings.css',
   './manifest.webmanifest',
   './assets/tabi-icon-192.png',
   './assets/tabi-icon-512.png'
